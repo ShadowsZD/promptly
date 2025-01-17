@@ -1,0 +1,319 @@
+tables:
+  - name: raw_patient
+    description: "Table with raw data about patients."
+    columns:
+      - name: id
+        type: serial
+        description: "Unique identifier for each patient."
+        constraints:
+          - primary_key: true
+          - not_null: true
+        tests:
+          - name: "Unique id"
+            type: "unique"
+            description: "Ensure each ID is unique."
+          - name: "Not Null id"
+            type: "not_null"
+            description: "Ensure the ID cannot be null."
+
+      - name: first_name
+        type: varchar(100)
+        description: "First name of the patient."
+        tests:
+          - name: "Length first_name"
+            type: "length"
+            max_length: 100
+            description: "Ensure first_name does not exceed 100 characters."
+
+      - name: last_name
+        type: varchar(100)
+        description: "Last name of the patient."
+        tests:
+          - name: "Test length of last_name"
+            type: "length"
+            max_length: 100
+            description: "Ensure last_name does not exceed 100 characters."
+
+      - name: birth_date
+        type: date
+        description: "Birth date of the patient."
+        constraints:
+          - nullable: true
+        tests:
+          - name: "Test if birth_date is a valid date or NULL"
+            type: "valid_date"
+            description: "Ensure the birth_date is a valid date format or NULL."
+
+      - name: gender
+        type: varchar(20)
+        description: "Gender of the patient."
+        constraints:
+          - nullable: true
+        tests:
+          - name: "Test gender length"
+            type: "length"
+            max_length: 20
+            description: "Ensure the gender does not exceed 20 characters."
+
+      - name: address
+        type: varchar(255)
+        description: "Address of the patient"
+        tests:
+        - name: "Test address length"
+            type: "length"
+            max_length: 255
+            description: "Ensure the address does not exceed 255 characters."
+          
+      - name: city
+        type: varchar(100)
+        description: "Address of the patient"
+        tests:
+        - name: "Test city length"
+            type: "length"
+            max_length: 100
+            description: "Ensure the address does not exceed 100 characters."
+
+      - name: state
+        type: varchar(2)
+        description: "State (location) of the patient"
+        tests:
+        - name: "Test state length"
+            type: "length"
+            max_length: 2
+            description: "Ensure the state does not exceed 2 characters."
+
+      - name: zip_code
+        type: varchar(10)
+        description: "Zip code of the patient"
+        tests:
+        - name: "Test zip code length"
+            type: "length"
+            max_length: 10
+            description: "Ensure the zip code does not exceed 10 characters."
+      
+      - name: phone_number
+        type: varchar(20)
+        description: "Phone number of the patient"
+        tests:
+        - name: "Test phone number length"
+            type: "length"
+            max_length: 20
+            description: "Ensure the phone number does not exceed 20 characters."
+
+      - name: email
+        type: varchar(100)
+        description: "The email address of the patient."
+        constraints:
+          - nullable: true
+        tests:
+          - name: "Test email format"
+            type: "regex"
+            pattern: "^[a-zA-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+            description: "Ensure the email address follows a valid email format."
+          - name: "Test email uniqueness"
+            type: "unique"
+            description: "Ensure the email is unique in the table."
+      
+      - name: emergency_contact_name
+        type: varchar(200)
+        description: "Name of contact in case of patient emergency"
+        tests:
+        - name: "Test emergency contact name length"
+            type: "length"
+            max_length: 200
+            description: "Ensure the name does not exceed 200 characters."
+      
+      - name: emergency_contact_phone
+        type: varchar(20)
+        description: "Phone of contact in case of patient emergency"
+        tests:
+        - name: "Test emergency contact phone length"
+            type: "length"
+            max_length: 20
+            description: "Ensure the phone number does not exceed 20 characters."
+
+      - name: blood_type
+        type: varchar(10)
+        description: Blood type of patient"
+        tests:
+        - name: "Test blood type length"
+            type: "length"
+            max_length: 10
+            description: "Ensure the blood type does not exceed 10 characters."
+        - name: "Test blood type exists"
+          type: "enum"
+          allowed_values: ["A", "B", "AB", "O", "Unknown"]
+          description: "Ensure blood_type is one of the valid blood types."
+
+      - name: insurance_provider
+        type: varchar(100)
+        description: "Name of the insurance provider"
+        tests:
+        - name: "Test insurance provider length"
+            type: "length"
+            max_length: 100
+            description: "Ensure the provider name does not exceed 100 characters."
+      
+      - name: insurance_number
+        type: varchar(50)
+        description: "Number of the insurance of the patient"
+        tests:
+        - name: "Test insurance number length"
+            type: "length"
+            max_length: 50
+            description: "Ensure the insurance number does not exceed 50 characters."
+
+      - name: marital_status
+        type: varchar(20)
+        description: "Marital status of the patient"
+        tests:
+        - name: "Test marital status length"
+            type: "length"
+            max_length: 20
+            description: "Ensure the marital status does not exceed 20 characters."
+
+      - name: preferred_language
+        type: varchar(50)
+        description: "Preferred language of the patient"
+        tests:
+        - name: "Test prefered language length"
+            type: "length"
+            max_length: 50
+            description: "Ensure the preferred language does not exceed 50 characters."
+
+      - name: nationality
+        type: varchar(100)
+        description: "Nationality of the patient"
+        tests:
+        - name: "Test nationality length"
+            type: "length"
+            max_length: 100
+            description: "Ensure the nationality does not exceed 100 characters."
+
+      - name: allergies
+        type: TEXT
+        description: "Allergies of the patient"
+      
+      - name: last_visit_date
+        type: DATE
+        description: "Last visit of the patient"
+        tests:
+        - name: "Test last visit valid date"
+            type: "valid_date"
+            description: "Ensure the date is valid."
+
+      - name: created_at
+        type: TIMESTAMP
+        description: "Timestamp of record creation"
+        tests:
+        - name: "Test valid TIMESTAMP"
+            type: "valid_timestamp"
+            description: "Ensure the timestamp is valid."
+
+      - name: updated_at
+        type: TIMESTAMP
+        description: "Timestamp of record update"
+        tests:
+        - name: "Test valid TIMESTAMP"
+            type: "valid_timestamp"
+            description: "Ensure the timestamp is valid."
+
+  - name: fhir_patient
+    description: "Table with transformed data about patients."
+    columns:
+      - name: id
+        type: varchar(255)
+        description: "Unique identifier for each patient, generated from patient attributes."
+        constraints:
+          - primary_key: true
+          - not_null: true
+        tests:
+          - name: "Unique id"
+            type: "unique"
+            description: "Ensure each ID is unique."
+          - name: "Not Null id"
+            type: "not_null"
+            description: "Ensure the ID cannot be null."
+        
+      - name: full_name
+        type: varchar(200)
+        description: "Patient full name: first_name + last_name"
+        tests:
+          - name: "Name is correct"
+            type: "equal"
+            description: "Ensure full name is concatenation of first_name and last_name"
+
+      - name: birth_date
+        type: DATE
+        description: "Patient birth date"
+        constraints:
+          - not_null: true
+        tests:
+          - name: "Birth date is valid"
+            type: "valid_date"
+            description: "Ensure the birth date is a valid date"
+          - name: "Birth date is not null"
+            type: "not_null"
+            description: "Ensure the birth date is not null"
+
+      - name: gender
+        type: varchar(20)
+        description: "Gender of the patient."
+        tests:
+          - name: "Test gender length"
+            type: "length"
+            max_length: 20
+            description: "Ensure the gender does not exceed 20 characters."
+
+      - name: address
+        type: varchar(255)
+        description: "Address of the patient"
+        tests:
+          - name: "Test address length"
+            type: "length"
+            max_length: 255
+            description: "Ensure the address does not exceed 20 characters."
+
+      - name: telecom
+        type: JSONB
+        description: "JSON object with phone and email of patient"
+        tests:
+          - name: "Test telecom fields"
+            type: "has_field"
+            description: "Ensure the telecom has phone and email fields"
+          - name: "Test telecom phone"
+            type: "equal"
+            description: "Test telecom phone field equals patient phone"
+          - name: "Test telecom email"
+            type: "equal"
+            description: "Test telecom email field equals patient email"
+          
+      - name: marital_status
+        type: varchar(20)
+        description: "Marital status of the patient"
+        tests:
+          - name: "Test marital status length fields"
+            type: "has_field"
+            max_length: 20
+            description: "Ensure the marital status does not exceed 20 characters."
+      
+      - name: insurance_number
+        type: varchar(50)
+        description: "Number of the insurance of the patient"
+        tests:
+        - name: "Test insurance number length"
+            type: "length"
+            max_length: 50
+            description: "Ensure the insurance number does not exceed 50 characters."
+
+      - name: nationality
+        type: varchar(100)
+        description: "Nationality of the patient"
+        tests:
+        - name: "Test nationality length"
+            type: "length"
+            max_length: 100
+            description: "Ensure the nationality does not exceed 100 characters."
+
+
+
