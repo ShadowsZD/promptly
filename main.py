@@ -76,7 +76,7 @@ def insert_csv(db_name:str, csv_file: str, table_name: str):
     headers = list(df.columns)
     columns = ", ".join(headers)
 
-    with open(csv_file, 'r') as file:
+    with open(csv_file, 'r', encoding='utf-8') as file:
         cursor.copy_expert(f"COPY {table_name} ({columns}) FROM STDIN WITH CSV HEADER", file)
         print(f"CSV data for {table_name} loaded successfully.")
 
