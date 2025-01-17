@@ -3,6 +3,7 @@
 This is a code solving the exercise provided
 
 ## Requirements
+Clone the repo, then install requirements
 
 ```bash
 pip install -r requirements.txt
